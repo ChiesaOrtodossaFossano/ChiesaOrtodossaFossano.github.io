@@ -1,0 +1,1479 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  /* Aura Sacra Palette: Tonalità Pergamenata e Oro Sacro */
+  --bg-primary: #fcf9f2;
+  --bg-secondary: #f4eee1;
+  --bg-card: #ffffff;
+  --bg-card-alt: #f8f4ec;
+  --bg-parchment: #fdfbf7;
+  
+  --text-primary: #2a241e;
+  --text-secondary: #6e6255;
+  --text-muted: #9c8e80;
+  
+  --border-color: #e5dac9;
+  --border-subtle: rgba(198, 146, 20, 0.2);
+  
+  --accent-gold: #c69214;
+  --accent-gold-light: #dfa929;
+  --accent-gold-glow: rgba(198, 146, 20, 0.28);
+  --accent-vermilion: #b93b2c;
+  --accent-blue: #235789;
+  
+  --font-serif: 'EB Garamond', Georgia, serif;
+  --font-display: 'Cinzel', serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  
+  --card-shadow: 0 4px 20px -2px rgba(90, 70, 40, 0.08);
+  --card-shadow-hover: 0 10px 28px -4px rgba(198, 146, 20, 0.22);
+}
+
+/* Aura Sacra Tema Notte / Vespro (Liturgico Notturno) */
+[data-theme="night"] {
+  --bg-primary: #121214;
+  --bg-secondary: #0c0c0e;
+  --bg-card: #18181c;
+  --bg-card-alt: #1f1f25;
+  --bg-parchment: #151519;
+  
+  --text-primary: #eedfc7;
+  --text-secondary: #baaa93;
+  --text-muted: #7d705e;
+  
+  --border-color: #2e2c34;
+  --border-subtle: rgba(212, 163, 75, 0.2);
+  
+  --accent-gold: #d4a34b;
+  --accent-gold-light: #f3c267;
+  --accent-gold-glow: rgba(212, 163, 75, 0.28);
+  --accent-vermilion: #c94a3e;
+  --accent-blue: #5b92e5;
+  
+  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+  --card-shadow-hover: 0 12px 36px rgba(212, 163, 75, 0.3);
+}
+
+[data-theme="night"] .header {
+  background-color: rgba(18, 18, 20, 0.95);
+  border-bottom: 1px solid rgba(212, 163, 75, 0.3);
+}
+
+[data-theme="night"] .footer-sacred {
+  background-color: #0a0908;
+  border-top-color: var(--accent-gold);
+}
+
+[data-theme="night"] .brand-icon img {
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.7)) 
+          drop-shadow(0 10px 24px rgba(212, 163, 75, 0.45));
+}
+
+[data-theme="night"] .brand:hover .brand-icon img {
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.85)) 
+          drop-shadow(0 14px 30px rgba(212, 163, 75, 0.8)) 
+          drop-shadow(0 4px 18px rgba(255, 217, 102, 0.65));
+}
+
+[data-theme="night"] .footer-brand img {
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.7)) 
+          drop-shadow(0 6px 16px rgba(212, 163, 75, 0.4));
+}
+
+/* Reset base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-serif);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* =========================================================
+   NAVBAR & HEADER (Stile Aura Sacra)
+   ========================================================= */
+.header {
+  position: sticky;
+  top: 0;
+  background-color: rgba(253, 251, 247, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 12px rgba(42, 36, 30, 0.04);
+}
+
+.navbar {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1.5rem;
+}
+
+/* Logo + Titolo Parrocchia */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+/* Logo Stendardo Reale (Grande e Dettagliato) */
+.brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.brand-icon img {
+  height: 68px;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  /* Ombra marcata, intensa e ben visibile su sfondo chiaro */
+  filter: drop-shadow(0 4px 5px rgba(20, 15, 10, 0.42)) 
+          drop-shadow(0 10px 18px rgba(20, 15, 10, 0.36)) 
+          drop-shadow(0 18px 28px rgba(20, 15, 10, 0.22));
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease;
+}
+
+.brand:hover .brand-icon img {
+  transform: translateY(-2px) scale(1.05);
+  filter: drop-shadow(0 6px 8px rgba(20, 15, 10, 0.52)) 
+          drop-shadow(0 14px 24px rgba(20, 15, 10, 0.44)) 
+          drop-shadow(0 22px 34px rgba(20, 15, 10, 0.28));
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.brand-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+
+/* Link di Navigazione Desktop */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  list-style: none;
+  flex-wrap: nowrap;
+}
+
+.nav-link {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 6px 11px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  position: relative;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 38px;
+  box-sizing: border-box;
+}
+
+.nav-link:hover {
+  color: var(--accent-gold);
+  background-color: rgba(198, 146, 20, 0.08);
+}
+
+.nav-link.active {
+  color: var(--accent-gold);
+  background-color: rgba(198, 146, 20, 0.12);
+  font-weight: 600;
+  border: 1px solid rgba(198, 146, 20, 0.35);
+}
+
+/* Pulsante Risalto Liturgie */
+.nav-btn-highlight {
+  background: linear-gradient(135deg, var(--accent-gold) 0%, #aa8214 100%);
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 2px 8px var(--accent-gold-glow);
+  border: 1px solid var(--accent-gold);
+  white-space: nowrap;
+}
+
+.nav-btn-highlight:hover {
+  background: linear-gradient(135deg, var(--accent-gold-light) 0%, var(--accent-gold) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--accent-gold-glow);
+  color: #ffffff !important;
+}
+
+/* Mobile Toggle Hamburger */
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  padding: 6px;
+}
+
+/* =========================================================
+   STRUTTURA CONTENUTI & HERO
+   ========================================================= */
+main {
+  flex: 1;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+/* Hero Section */
+.hero-sacred {
+  position: relative;
+  text-align: center;
+  padding: 4.5rem 1.5rem 3.5rem;
+  background: radial-gradient(circle at 50% 25%, rgba(198, 146, 20, 0.1) 0%, rgba(252, 249, 242, 0) 70%);
+  border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.hero-aura {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(198, 146, 20, 0.18) 0%, rgba(198, 146, 20, 0) 65%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent-gold);
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.hero-subtitle {
+  font-size: 1.35rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: 1.8rem;
+}
+
+.hero-divider {
+  max-width: 260px;
+  width: 100%;
+  height: auto;
+  margin: 1.2rem auto 2rem;
+  display: block;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Pulsanti Generici */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-gold) 0%, #aa8214 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px var(--accent-gold-glow);
+  border: 1px solid var(--accent-gold);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--accent-gold-light) 0%, var(--accent-gold) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px var(--accent-gold-glow);
+}
+
+.btn-secondary {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  background-color: var(--bg-card-alt);
+}
+
+/* =========================================================
+   SCHEDE & CARD SACRE
+   ========================================================= */
+.card-sacred {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.card-sacred:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--card-shadow-hover);
+  border-color: rgba(198, 146, 20, 0.4);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.8rem;
+}
+
+.card-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background-color: rgba(198, 146, 20, 0.12);
+  color: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--text-primary);
+  margin-bottom: 0.8rem;
+}
+
+/* Intestazioni di Sezione */
+.section-header {
+  text-align: center;
+  margin-bottom: 2.8rem;
+}
+
+.section-tag {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-gold);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.section-divider {
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  margin: 0.8rem auto 0;
+  display: block;
+}
+
+/* Banner Versetto Sacro */
+.scripture-banner {
+  background-color: var(--bg-secondary);
+  border-left: 4px solid var(--accent-gold);
+  border-radius: 0 12px 12px 0;
+  padding: 1.6rem 2rem;
+  margin: 3rem 0;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+
+.scripture-ref {
+  display: block;
+  font-style: normal;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+  margin-top: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* =========================================================
+   FOOTER (Stile Solenne)
+   ========================================================= */
+.footer-sacred {
+  background-color: #1a1612;
+  color: #dfd5c8;
+  padding: 3.5rem 1.5rem 1.8rem;
+  border-top: 2px solid var(--accent-gold);
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 2.5rem;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.footer-brand img {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+  transition: transform 0.25s ease;
+}
+
+.footer-brand span {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fbf7ed;
+  letter-spacing: 0.5px;
+}
+
+.footer-text {
+  font-size: 1.05rem;
+  color: #a89a8a;
+  line-height: 1.6;
+}
+
+.footer-heading {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--accent-gold);
+  margin-bottom: 1.2rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: #c4b6a4;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent-gold);
+}
+
+.footer-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(229, 218, 201, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: #8c7e6f;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN (100% Mobile Friendly)
+   ========================================================= */
+@media (max-width: 1080px) {
+  .navbar {
+    padding: 0.75rem 1rem;
+  }
+
+  .brand {
+    gap: 10px;
+  }
+
+  .brand-icon img {
+    height: 52px;
+  }
+
+  .brand-title {
+    font-size: clamp(0.95rem, 3.6vw, 1.15rem);
+  }
+
+  .brand-subtitle {
+    font-size: clamp(0.65rem, 2.5vw, 0.75rem);
+    letter-spacing: 0.8px;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-parchment);
+    flex-direction: column;
+    padding: 1.2rem 1rem;
+    border-bottom: 2px solid var(--accent-gold);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+    gap: 8px;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+  }
+
+  .nav-links.open {
+    display: flex;
+    animation: slideDownMenu 0.25s ease-out;
+  }
+
+  @keyframes slideDownMenu {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-link {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 11px 16px;
+    font-size: 1rem;
+    border-radius: 8px;
+    height: auto;
+    min-height: 44px;
+    white-space: normal;
+  }
+
+  .nav-controls-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  .nav-controls-group .lang-toggle-btn,
+  .nav-controls-group .theme-toggle {
+    flex: 1;
+    height: 42px;
+    border-radius: 8px;
+    justify-content: center;
+  }
+
+  .nav-links .theme-toggle,
+  .nav-links .lang-toggle-btn {
+    width: 100%;
+    border-radius: 8px;
+    height: 42px;
+    margin-top: 4px;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-primary);
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-sacred {
+    padding: 3rem 1rem 2.2rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.7rem, 7vw, 2.3rem);
+  }
+
+  .hero-subtitle {
+    font-size: 1.15rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .grid-2, .grid-3 {
+    grid-template-columns: 1fr !important;
+    gap: 1.2rem;
+  }
+
+  .card-sacred {
+    padding: 1.4rem 1.1rem;
+  }
+
+  .container {
+    padding: 2rem 1rem;
+  }
+
+  .scripture-banner {
+    padding: 1.2rem 1.2rem;
+    font-size: 1.1rem;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .troparion-card {
+    padding: 1.8rem 1.2rem;
+  }
+
+  .troparion-text {
+    font-size: 1.1rem;
+  }
+}
+
+/* =========================================================
+   COMPONENTI INTERATTIVI AURA SACRA
+   ========================================================= */
+
+/* Pulsante Cambio Tema (Dawn / Night) */
+.theme-toggle {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--accent-gold);
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  box-shadow: 0 4px 12px var(--accent-gold-glow);
+}
+
+.theme-toggle:active {
+  transform: scale(0.96);
+}
+
+/* Selettore Lingua IT / RO in stile Aura Sacra */
+.lang-toggle-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  height: 38px;
+  padding: 0 10px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  user-select: none;
+}
+
+.lang-toggle-btn:hover {
+  border-color: var(--accent-gold);
+  box-shadow: 0 4px 12px var(--accent-gold-glow);
+}
+
+.lang-toggle-btn .lang-opt {
+  color: var(--text-muted);
+  transition: color 0.2s ease, font-weight 0.2s ease;
+  padding: 2px 3px;
+  border-radius: 4px;
+}
+
+.lang-toggle-btn .lang-opt.active {
+  color: var(--accent-gold);
+  font-weight: 800;
+}
+
+.lang-toggle-btn .lang-divider {
+  color: var(--border-color);
+  font-weight: 400;
+  user-select: none;
+}
+
+.nav-controls-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Floating Button "Torna Su" */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-gold) 0%, #aa8214 100%);
+  color: #ffffff;
+  border: 1px solid var(--accent-gold-light);
+  box-shadow: 0 4px 16px var(--accent-gold-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
+}
+
+.scroll-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 6px 22px var(--accent-gold-glow);
+}
+
+/* Badge Prossima Liturgia */
+.next-liturgy-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  margin-top: 1.2rem;
+  box-shadow: var(--card-shadow);
+}
+
+.next-liturgy-badge .pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* Scheda Tropario / Preghiera Solenne */
+.troparion-card {
+  background-color: var(--bg-card);
+  border: 2px solid rgba(198, 146, 20, 0.35);
+  border-radius: 16px;
+  padding: 2.4rem 2rem;
+  position: relative;
+  box-shadow: var(--card-shadow);
+  margin: 3.5rem auto;
+  max-width: 850px;
+  text-align: center;
+}
+
+.troparion-card::before {
+  content: "☦";
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--bg-card);
+  padding: 0 16px;
+  color: var(--accent-gold);
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.troparion-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--accent-gold);
+  margin-bottom: 0.5rem;
+}
+
+.troparion-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 1.5rem;
+}
+
+.troparion-text {
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Griglia Galleria Icone e Luogo Sacro (Disposta a due a due: 2 colonne) */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.2rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+}
+
+.gallery-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.gallery-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-gold);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.gallery-img-container {
+  height: 320px;
+  background: radial-gradient(circle, rgba(198, 146, 20, 0.12) 0%, var(--bg-card-alt) 80%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+  .gallery-img-container {
+    height: 270px;
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-img-container {
+    height: 240px;
+  }
+}
+
+.gallery-img-container i {
+  font-size: 3.5rem;
+  color: var(--accent-gold);
+  opacity: 0.7;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.gallery-card:hover .gallery-img-container i {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.gallery-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.gallery-card:hover .gallery-img-container img {
+  transform: scale(1.05);
+}
+
+/* Ritratti Iconografici dei Santi Patroni */
+.patron-icon-frame {
+  width: 160px;
+  height: 225px;
+  margin: 0 auto 1.4rem;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 3px solid var(--accent-gold);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+  background-color: var(--bg-card-alt);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.patron-icon-frame:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(198, 146, 20, 0.35);
+}
+
+.patron-icon-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.gallery-caption {
+  padding: 1.4rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.gallery-caption h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.gallery-caption p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   PAROLA DELLA PARROCCHIA & BLOG PASTORALE
+   ========================================================= */
+.priest-header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.filter-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Controlli Autenticazione Parroco */
+.priest-auth-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.badge-priest-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(198, 146, 20, 0.15);
+  color: var(--accent-gold);
+  border: 1px solid var(--accent-gold);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.delete-msg-btn {
+  background: transparent;
+  border: 1px solid rgba(185, 59, 44, 0.35);
+  color: var(--accent-vermilion);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+}
+
+.delete-msg-btn:hover {
+  background: var(--accent-vermilion);
+  color: #ffffff;
+  border-color: var(--accent-vermilion);
+  box-shadow: 0 2px 8px rgba(185, 59, 44, 0.25);
+}
+
+.alert-sacred-error {
+  background: rgba(185, 59, 44, 0.12);
+  border: 1px solid var(--accent-vermilion);
+  color: var(--accent-vermilion);
+}
+
+.alert-sacred-success {
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid #22c55e;
+  color: #16a34a;
+}
+
+.alert-sacred-info {
+  background: rgba(198, 146, 20, 0.12);
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.article-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 2.2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.article-card:hover {
+  border-color: rgba(198, 146, 20, 0.4);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.category-tag {
+  background: rgba(198, 146, 20, 0.15);
+  color: var(--accent-gold);
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.8px;
+}
+
+.category-tag.omelia {
+  background: rgba(35, 87, 137, 0.15);
+  color: var(--accent-blue);
+}
+
+.category-tag.lettera {
+  background: rgba(185, 59, 44, 0.15);
+  color: var(--accent-vermilion);
+}
+
+.category-tag.avviso {
+  background: rgba(217, 101, 20, 0.15);
+  color: #c95d0c;
+}
+
+.category-tag.santo {
+  background: rgba(132, 50, 160, 0.15);
+  color: #7b2996;
+}
+
+.category-tag.frase {
+  background: rgba(22, 122, 101, 0.15);
+  color: #126b58;
+}
+
+.category-tag.riflessione {
+  background: rgba(60, 90, 150, 0.15);
+  color: #314d87;
+}
+
+[data-theme="night"] .category-tag.avviso {
+  background: rgba(230, 126, 34, 0.22);
+  color: #f39c12;
+}
+
+[data-theme="night"] .category-tag.santo {
+  background: rgba(155, 89, 182, 0.22);
+  color: #bb86fc;
+}
+
+[data-theme="night"] .category-tag.frase {
+  background: rgba(26, 188, 156, 0.22);
+  color: #48c9b0;
+}
+
+[data-theme="night"] .category-tag.riflessione {
+  background: rgba(52, 152, 219, 0.22);
+  color: #64b5f6;
+}
+
+[data-theme="night"] .category-tag.omelia {
+  background: rgba(52, 152, 219, 0.22);
+  color: #70b5f9;
+}
+
+[data-theme="night"] .category-tag.lettera {
+  background: rgba(231, 76, 60, 0.22);
+  color: #f1948a;
+}
+
+.article-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+/* Immagini collegate ad Articoli, Avvisi e Bacheca */
+.article-image-container,
+.notice-image-container,
+.home-latest-image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card-alt);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.article-image-container img,
+.notice-image-container img,
+.home-latest-image-container img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.article-image-container:hover img,
+.notice-image-container:hover img,
+.home-latest-image-container:hover img {
+  transform: scale(1.02);
+}
+
+/* Griglia Immagini Multiple (Parola Della Parrocchia) */
+.article-images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 1rem 0 1.2rem;
+}
+
+@media (max-width: 550px) {
+  .article-images-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.article-body {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.article-body p {
+  margin-bottom: 1rem;
+}
+
+.article-signature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 1.2rem;
+  border-top: 1px dashed var(--border-color);
+}
+
+.article-signature i {
+  font-size: 1.8rem;
+  color: var(--accent-gold);
+}
+
+.article-signature-text {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.article-signature-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+/* Modale Scrittura Prete */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-overlay.open {
+  display: flex;
+  animation: fadeInModal 0.25s ease;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-window {
+  background: var(--bg-card);
+  border: 2px solid var(--accent-gold);
+  border-radius: 16px;
+  max-width: 650px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+  padding: 2rem;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: var(--accent-gold);
+}
+
+.modal-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-parchment);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px var(--accent-gold-glow);
+}
+
+textarea.form-control {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  min-height: 180px;
+  resize: vertical;
+}

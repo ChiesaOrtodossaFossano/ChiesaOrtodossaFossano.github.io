@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="schedule.title">Orari Funzioni | Parrocchia Ortodossa Romena Fossano/Mondovì</title>
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <meta name="theme-color" content="#c69214">
+
+  <!-- Inizializzazione immediata tema e lingua Aura Sacra (previene sfarfallio e sincronizza su tutto il sito) -->
+  <script>
+    (function() {
+      try {
+        var urlTheme = new URLSearchParams(window.location.search).get('theme');
+        var savedTheme = urlTheme;
+        if (!savedTheme) {
+          try { savedTheme = localStorage.getItem('chiesa_fossano_theme'); } catch(e) {}
+        }
+        if (!savedTheme) {
+          try { savedTheme = sessionStorage.getItem('chiesa_fossano_theme'); } catch(e) {}
+        }
+        if (!savedTheme && document.cookie) {
+          var m = document.cookie.match(/chiesa_fossano_theme=([^;]+)/);
+          if (m) savedTheme = m[1];
+        }
+        var active = savedTheme || 'dawn';
+        if (active === 'night') {
+          document.documentElement.setAttribute('data-theme', 'night');
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', '#121214');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+        }
+
+        var urlLang = new URLSearchParams(window.location.search).get('lang');
+        var savedLang = urlLang;
+        if (!savedLang) {
+          try { savedLang = localStorage.getItem('chiesa_fossano_lang'); } catch(e) {}
+        }
+        if (!savedLang) {
+          try { savedLang = sessionStorage.getItem('chiesa_fossano_lang'); } catch(e) {}
+        }
+        if (!savedLang && document.cookie) {
+          var lm = document.cookie.match(/chiesa_fossano_lang=([^;]+)/);
+          if (lm) savedLang = lm[1];
+        }
+        var activeLang = (savedLang === 'ro') ? 'ro' : 'it';
+        document.documentElement.setAttribute('lang', activeLang);
+        document.documentElement.setAttribute('data-lang', activeLang);
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Stile del sito -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="header">
+    <nav class="navbar">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">
+          <img src="img/favicon.png" alt="Logo Chiesa Ortodossa Fossano">
+        </div>
+        <div class="brand-text">
+          <span class="brand-title" data-i18n="brand.title">Parrocchia Ortodossa Romena</span>
+          <span class="brand-subtitle" data-i18n="brand.subtitle">Fossano/Mondovì</span>
+        </div>
+      </a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link" data-i18n="nav.home">Home</a></li>
+        <li><a href="chi-siamo.html" class="nav-link" data-i18n="nav.about">Chi Siamo</a></li>
+        <li><a href="orari.html" class="nav-link nav-btn-highlight" data-i18n="nav.schedule"><i class="fa-solid fa-church"></i> Orari Funzioni</a></li>
+        <li><a href="parola-della-parrocchia.html" class="nav-link" data-i18n="nav.priest">Parola Della Parrocchia</a></li>
+        <li><a href="avvisi.html" class="nav-link" data-i18n="nav.notices">Avvisi</a></li>
+        <li><a href="contatti.html" class="nav-link" data-i18n="nav.contact">Contatti</a></li>
+        <li class="nav-controls-item">
+          <div class="nav-controls-group">
+            <button id="langToggle" class="lang-toggle-btn" type="button" aria-label="Cambia lingua / Schimbă limba" title="Italiano / Română">
+              <span class="lang-opt active" data-lang="it">IT</span>
+              <span class="lang-divider">/</span>
+              <span class="lang-opt" data-lang="ro">RO</span>
+            </button>
+            <button id="themeToggle" class="theme-toggle" aria-label="Cambia tema"><i class="fa-solid fa-moon"></i></button>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Intestazione Pagina -->
+    <section class="hero-sacred">
+      <div class="hero-aura"></div>
+      <div class="hero-content">
+        <span class="hero-badge" data-i18n="schedule.hero_badge"><i class="fa-solid fa-church"></i> Parrocchia Ortodossa Romena · Fossano/Mondovì</span>
+        <h1 class="hero-title" data-i18n="schedule.hero_title">Orari delle Sante Funzioni</h1>
+        <p class="hero-subtitle" data-i18n="schedule.hero_subtitle">Celebrazioni liturgiche, momenti di preghiera e presenza pastorale del Padre Parroco</p>
+        <img src="img/divisore-alloro.svg" alt="Divisore" class="hero-divider">
+      </div>
+    </section>
+
+    <div class="container">
+
+      <!-- Griglia Orari Principali (Domenica, Sabato, Mercoledì) -->
+      <div class="grid-3" style="margin-bottom: 3.5rem;">
+        
+        <!-- Domenica -->
+        <div class="card-sacred" style="border-top: 4px solid var(--accent-gold);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.2rem;">
+            <div class="card-icon" style="margin-bottom: 0;"><i class="fa-solid fa-sun"></i></div>
+            <span style="font-family: var(--font-sans); font-size: 0.8rem; background-color: rgba(198, 146, 20, 0.15); color: var(--accent-gold); padding: 4px 10px; border-radius: 20px; font-weight: 600;" data-i18n="schedule.sun_badge">OGNI DOMENICA</span>
+          </div>
+          <h2 class="card-title" data-i18n="schedule.sun_title">Domenica: Giorno del Signore</h2>
+          <ul style="list-style: none; margin-top: 1.2rem; display: flex; flex-direction: column; gap: 1rem; color: var(--text-secondary); font-size: 1.05rem;">
+            <li style="display: flex; gap: 12px; align-items: baseline;">
+              <strong style="color: var(--accent-gold); font-family: var(--font-sans); min-width: 55px;">09:00</strong>
+              <div>
+                <strong style="color: var(--text-primary); display: block;" data-i18n="schedule.sun_item1_title">09:00 — Mattutino (Utrenia)</strong>
+                <span style="font-size: 0.92rem;" data-i18n="schedule.sun_item1_desc">Rito mattutino di lode, lettura dei salmi e tempo di preparazione alla celebrazione eucaristica.</span>
+              </div>
+            </li>
+            <li style="display: flex; gap: 12px; align-items: baseline; border-top: 1px dashed var(--border-color); padding-top: 0.8rem;">
+              <strong style="color: var(--accent-gold); font-family: var(--font-sans); min-width: 55px;">10:00</strong>
+              <div>
+                <strong style="color: var(--text-primary); display: block;" data-i18n="schedule.sun_item2_title">10:00 — Santa e Divina Liturgia & Omelia</strong>
+                <span style="font-size: 0.92rem;" data-i18n="schedule.sun_item2_desc">Solenne liturgia eucaristica comunitaria presieduta da Padre Nicolae Pușcașu con predicazione della Parola di Dio.</span>
+              </div>
+            </li>
+            <li style="display: flex; gap: 12px; align-items: baseline; border-top: 1px dashed var(--border-color); padding-top: 0.8rem;">
+              <strong style="color: var(--accent-gold); font-family: var(--font-sans); min-width: 55px;">12:30</strong>
+              <div>
+                <strong style="color: var(--text-primary); display: block;" data-i18n="schedule.sun_item3_title">12:30 — Agape Fraterna & Incontro Comunitario</strong>
+                <span style="font-size: 0.92rem;" data-i18n="schedule.sun_item3_desc">Momento di fraternità e condivisione tra famiglie, accoglienza dei fedeli e scuola domenicale per bambini.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Sabato -->
+        <div class="card-sacred" style="border-top: 4px solid var(--accent-blue);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.2rem;">
+            <div class="card-icon" style="margin-bottom: 0; background-color: rgba(35, 87, 137, 0.12); color: var(--accent-blue);"><i class="fa-solid fa-moon"></i></div>
+            <span style="font-family: var(--font-sans); font-size: 0.8rem; background-color: rgba(35, 87, 137, 0.15); color: var(--accent-blue); padding: 4px 10px; border-radius: 20px; font-weight: 600;" data-i18n="schedule.sat_badge">OGNI SABATO</span>
+          </div>
+          <h2 class="card-title" data-i18n="schedule.sat_title">Sabato: Liturgia & Confessioni</h2>
+          <ul style="list-style: none; margin-top: 1.2rem; display: flex; flex-direction: column; gap: 1rem; color: var(--text-secondary); font-size: 1.05rem;">
+            <li style="display: flex; gap: 12px; align-items: baseline;">
+              <strong style="color: var(--accent-blue); font-family: var(--font-sans); min-width: 55px;">09:30</strong>
+              <div>
+                <strong style="color: var(--text-primary); display: block;" data-i18n="schedule.sat_morning_title">09:30 — Santa Liturgia & Commemorazione dei Defunti (Parastas)</strong>
+                <span style="font-size: 0.92rem;" data-i18n="schedule.sat_morning_desc">Celebrazione eucaristica mattutina del sabato con le preghiere di suffragio per tutti i nostri cari defunti.</span>
+              </div>
+            </li>
+            <li style="display: flex; gap: 12px; align-items: baseline; border-top: 1px dashed var(--border-color); padding-top: 0.8rem;">
+              <strong style="color: var(--accent-blue); font-family: var(--font-sans); min-width: 55px;">16:30</strong>
+              <div>
+                <strong style="color: var(--text-primary); display: block;" data-i18n="schedule.sat_afternoon_title">16:30 – 18:30 — Sante Confessioni & Colloquio Spirituale</strong>
+                <span style="font-size: 0.92rem;" data-i18n="schedule.sat_afternoon_desc">Disponibilità di Padre Nicolae in chiesa per le confessioni individuali e la direzione spirituale (su richiesta dei fedeli).</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Mercoledì -->
+        <div class="card-sacred" style="border-top: 4px solid var(--accent-gold);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.2rem;">
+            <div class="card-icon" style="margin-bottom: 0; background-color: rgba(198, 146, 20, 0.12); color: var(--accent-gold);"><i class="fa-solid fa-hands-praying"></i></div>
+            <span style="font-family: var(--font-sans); font-size: 0.8rem; background-color: rgba(198, 146, 20, 0.15); color: var(--accent-gold); padding: 4px 10px; border-radius: 20px; font-weight: 600;" data-i18n="schedule.wed_badge">OGNI MERCOLEDÌ</span>
+          </div>
+          <h2 class="card-title" data-i18n="schedule.wed_title">Mercoledì Sera: Preghiere & Acatisto</h2>
+          <ul style="list-style: none; margin-top: 1.2rem; display: flex; flex-direction: column; gap: 1rem; color: var(--text-secondary); font-size: 1.05rem;">
+            <li style="display: flex; gap: 12px; align-items: baseline;">
+              <strong style="color: var(--accent-gold); font-family: var(--font-sans); min-width: 55px;">19:30</strong>
+              <div>
+                <strong style="color: var(--text-primary); display: block;" data-i18n="schedule.wed_item1_title">19:30 – 20:30 (fino alle 21:00)</strong>
+                <span style="font-size: 0.92rem;" data-i18n="schedule.wed_item1_desc">Preghiere della Sera, Inno Acatisto al Santo Patrono e momento di approfondimento spirituale con i fedeli.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Servizi Pastorali e Sacramenti con il Parroco -->
+      <div class="card-sacred" style="background-color: var(--bg-card-alt); margin-bottom: 3rem; border-left: 5px solid var(--accent-gold);">
+        <div class="section-header" style="margin-bottom: 1.5rem;">
+          <span class="section-tag" data-i18n="schedule.pastoral_tag">Cura Pastorale di Padre Nicolae Pușcașu</span>
+          <h2 class="section-title" data-i18n="schedule.pastoral_title">I Santi Sacramenti & La Guida Spirituale</h2>
+          <img src="img/divisore-alloro.svg" alt="Divisore" class="section-divider">
+        </div>
+        <p style="text-align: center; max-width: 780px; margin: 0 auto 2rem; color: var(--text-secondary); font-size: 1.15rem; line-height: 1.8;" data-i18n="schedule.pastoral_text">
+          <strong>Padre Nicolae Pușcașu</strong> è a disposizione per la celebrazione del <strong>Santo Battesimo</strong>, del <strong>Sacramento del Matrimonio (Incoronazione)</strong>, 
+          per la visita e l'unzione dei malati, la benedizione delle case e per qualunque necessità spirituale personale o familiare.
+        </p>
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+          <a href="tel:+393284282810" class="btn btn-secondary" data-i18n="schedule.pastoral_phone_btn">
+            <i class="fa-solid fa-phone"></i> Chiama Padre Nicolae (+39 328 428 2810)
+          </a>
+          <a href="contatti.html" class="btn btn-primary" data-i18n="schedule.pastoral_btn">
+            <i class="fa-solid fa-envelope"></i> Scrivi a Padre Nicolae (fossano@dor-italia.it)
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer-sacred">
+    <div class="footer-container">
+      <div>
+        <div class="footer-brand">
+          <img src="img/favicon.png" alt="Logo Chiesa Ortodossa Fossano">
+          <span data-i18n="footer.brand">Parrocchia Ortodossa Romena Fossano/Mondovì</span>
+        </div>
+        <p class="footer-text" data-i18n="footer.desc">
+          <strong>Parrocchia Ortodossa Romena Fossano/Mondovì</strong><br>
+          Sotto la protezione spirituale di <strong>San Giacomo di Putna</strong> (15 Maggio) e <strong>Sant'Antonio il Grande</strong> (17 Gennaio).<br>
+          Cura pastorale: <strong>Padre Nicolae Pușcașu</strong>. Sede attuale: Via Craveri 93, 12045 Fossano (CN). In cammino con raccolta fondi per la futura sede definitiva.
+        </p>
+        <p class="footer-text" style="font-size: 0.85rem; margin-top: 0.5rem; color: #8c7e6f;" data-i18n="footer.canonical">
+          In comunione canonica con la Diocesi Ortodossa Romena d'Italia.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="footer-heading" data-i18n="footer.heading_pages">Pagine</h4>
+        <ul class="footer-links">
+          <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+          <li><a href="chi-siamo.html" data-i18n="nav.about">Chi Siamo</a></li>
+          <li><a href="orari.html" data-i18n="nav.schedule">Orari Funzioni</a></li>
+          <li><a href="parola-della-parrocchia.html" data-i18n="nav.priest">Parola Della Parrocchia</a></li>
+          <li><a href="avvisi.html" data-i18n="nav.notices">Avvisi Parrocchiali</a></li>
+          <li><a href="contatti.html" data-i18n="nav.contact">Dove Siamo & Contatti</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-heading" data-i18n="footer.heading_contact">Contatti</h4>
+        <ul class="footer-links">
+          <li data-i18n="footer.address"><a href="https://www.google.com/maps/search/?api=1&query=Via+Craveri+93+12045+Fossano+CN" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;" title="Apri su Google Maps"><i class="fa-solid fa-location-dot" style="color: var(--accent-gold); margin-right: 6px;"></i> Via Craveri 93, Fossano</a></li>
+          <li><a href="mailto:fossano@dor-italia.it" style="color: inherit; text-decoration: none;" title="Invia una email"><i class="fa-solid fa-envelope" style="color: var(--accent-gold); margin-right: 6px;"></i> fossano@dor-italia.it</a></li>
+          <li><a href="tel:+393284282810" style="color: inherit; text-decoration: none;" title="Chiama direttamente"><i class="fa-solid fa-phone" style="color: var(--accent-gold); margin-right: 6px;"></i> +39 328 428 2810</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p data-i18n="footer.rights">© <span id="year"></span> Parrocchia Ortodossa Romena Fossano/Mondovì. Tutti i diritti riservati.</p>
+      <p style="font-size: 0.8rem; color: #7a6e60;" data-i18n="footer.tradition">Nel rispetto della tradizione liturgica ortodossa.</p>
+    </div>
+  </footer>
+
+  <script src="js/translations.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
